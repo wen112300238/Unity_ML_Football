@@ -6,6 +6,7 @@ public class Robot : Agent
 {
     [Header("速度"), Range(1, 50)]
     public float speed = 10;
+
     /// <summary>
     /// 機器人鋼體
     /// </summary>
@@ -33,11 +34,11 @@ public class Robot : Agent
         rigBall.angularVelocity = Vector3.zero;
 
         //隨機機器人位置
-        Vector3 posRobot = new Vector3(Random.Range(-2f, 2f), 0.1f, Random.Range(-2f, 0f));
+        Vector3 posRobot = new Vector3(Random.Range(-1f, 1f), 0.1f, Random.Range(-2f, 0f));
         transform.position = posRobot;
 
         //隨機足球位置
-        Vector3 posBall = new Vector3(Random.Range(-2f, 2f), 0.1f, Random.Range(1f, 2f));
+        Vector3 posBall = new Vector3(Random.Range(-0.5f, 0.5f), 0.1f, Random.Range(1f, 1.5f));
         rigBall.position = posBall;
 
         //足球尚未進入球門
@@ -50,11 +51,11 @@ public class Robot : Agent
     /// </summary>
     public override void CollectObservations(VectorSensor sensor)
     {
-        //加入觀測資料:機器人、足球座標、機器人加速度 X、Y
+        //加入觀測資料:機器人、足球座標、機器人加速度 X、Z
         sensor.AddObservation(transform.position);
         sensor.AddObservation(rigBall.position);
         sensor.AddObservation(rigRobot.velocity.x);
-        sensor.AddObservation(rigRobot.velocity.y);
+        sensor.AddObservation(rigRobot.velocity.z);
     }
 
     /// <summary>
